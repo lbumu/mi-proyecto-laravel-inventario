@@ -5,28 +5,7 @@
          'icon' => 'fa-solid fa-gauge',
          'href' => route('admin.dashboard'),
          'active' => request()->routeIs('admin.dashboard')
-      ],
-      [
-         'header' => 'Administrar Paginas'
-         ],
-        [
-         'name' => 'Chue 2',
-         'icon' => 'fa-solid fa-gauge',
-         'href' => route('admin.dashboard'),
-         'active' => false,
-         'Submenu' => [
-            [
-               'name' => 'Submenu 1',
-               'href' => '#',
-               'active' => false,
-            ],
-            [
-               'name' => 'Submenu 2',
-               'href' => '#',
-               'active' => false,
-            ],
-         ]
-      ],
+      ]
    ];
 @endphp
 
