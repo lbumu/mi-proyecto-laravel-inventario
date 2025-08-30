@@ -1,13 +1,13 @@
-<x-admin-layout :breadcrumbs="[
+<x-admin-layout 
+title="Dashboard | Coder free"
+:breadcrumbs="[
     ['name' => 'Dashboard', 
     'href' => route('admin.dashboard'),
     ],
     ['name' => 'Pruebas'],
     ]">
 
-    <x-slot name="action">
-        Hola Mundo 
-    </x-slot>
+   
 
-    Hola desde el admin 
+    
 </x-admin-layout>
