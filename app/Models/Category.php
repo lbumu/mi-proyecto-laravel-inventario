@@ -8,4 +8,11 @@ class Category extends Model
 {
     // Mass assignable attributes
     protected $fillable = ['name', 'description'];
+
+    //Relacion uno a muchos
+    public function products()
+    {
+        return $this->hasMany(Product::class);          
 }
+}
+
