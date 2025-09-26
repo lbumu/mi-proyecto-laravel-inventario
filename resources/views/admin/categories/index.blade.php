@@ -11,7 +11,7 @@ title="Categoría | Codersfree"
     ]
     ]">
 
-   
+@livewire('admin.datatables.category-table')
 
     
 </x-admin-layout>
