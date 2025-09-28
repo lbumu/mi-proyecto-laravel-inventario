@@ -11,6 +11,11 @@ title="Categoría | Codersfree"
     ]
     ]">
 
+    <x-slot name="action">
+        <x-wire-button href="{{ route('admin.categories.create') }}">
+            Nuevo
+        </x-wire-button>
+
 @livewire('admin.datatables.category-table')
 
     
