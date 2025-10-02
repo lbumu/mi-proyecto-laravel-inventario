@@ -29,7 +29,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255|unique:categories,name',
+            'description' => 'nullable|string|max:1000',
+        ]);
+
+        $category = Category::create($data);
+
+        return redirect()->route('admin.categories.edit',$category);
+        
     }
 
     /**

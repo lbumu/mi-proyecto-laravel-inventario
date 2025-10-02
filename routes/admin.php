@@ -6,4 +6,4 @@ use App\Http\Controllers\Admin\CategoryController;
 Route::get('/', function () {
     return view('admin.dashboard');
 })->name('dashboard');
-Route::resource('categories', CategoryController::class)->except(['show']);
+Route::resource('categories', CategoryController::class)->except(['show']); // generates all routes except 'show'
