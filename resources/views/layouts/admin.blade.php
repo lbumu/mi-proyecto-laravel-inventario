@@ -19,6 +19,10 @@
         <!-- Fontawesome -->
          <script src="https://kit.fontawesome.com/af60fb507a.js" crossorigin="anonymous"></script>
 
+        <!-- SweetAlert2 -->
+         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
          <!-- wireui -->
          <wireui:scripts />
 
@@ -55,6 +59,13 @@
     @yield('content')
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+     @if(session('swal'))
+    <script>
+        Swal.fire(@json(session('swal')));
+    </script>
+    @endif
+
 </body>
     </body>
 </html>
