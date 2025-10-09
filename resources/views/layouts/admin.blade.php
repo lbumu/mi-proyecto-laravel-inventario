@@ -31,6 +31,9 @@
 
         <!-- Styles -->
         @livewireStyles
+
+        @stack('css')
+
     </head>
     <body class="font-sans antialiased bg-gray-50">
       
@@ -65,6 +68,8 @@
         Swal.fire(@json(session('swal')));
     </script>
     @endif
+
+    @stack('js')
 
 </body>
     </body>

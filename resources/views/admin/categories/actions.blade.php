@@ -4,7 +4,7 @@
     </x-wire-button>
 
     <form action="{{ route('admin.categories.destroy', $category) }}"
-     method="POST"> {{-- paso variable category a la ruta destroy --}}
+     method="POST" class="delete-form"> {{-- paso variable category a la ruta destroy --}}
         @csrf   
         @method('DELETE') 
         <x-wire-button type="submit" color="red" size="sm"> 
