@@ -31,7 +31,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $product = Product::create($data);
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Product Created',
+            'text' => 'The product has been created successfully.',
+        ]);
+
+        return redirect()->route('admin.products.edit', $product);
     }
 
     /**
@@ -47,7 +62,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.products.edit', compact('product'));
+        $categories = Category::all();
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -55,7 +71,22 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $product->update($data);
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Product Updated',
+            'text' => 'The product has been updated successfully.',
+        ]);
+
+        return redirect()->route('admin.products.edit', $product);
     }
 
     /**
@@ -63,6 +94,32 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        if($product->inventories()->exists()){
+            session()->flash('swal', [
+                'icon' => 'error',
+                'title' => 'Cannot Delete Product',
+                'text' => 'The product cannot be deleted because it has associated inventories.',
+            ]);
+        }
+
+        if($product->purchaseOrders()->exists()||$product->quotes()->exists()){
+            session()->flash('swal', [
+                'icon' => 'error',
+                'title' => 'Cannot Delete Product',
+                'text' => 'The product cannot be deleted because it is associated with purchase orders or quotes.',
+            ]);
+            return redirect()->route('admin.products.index');
+        }
+
+
+        $product->delete();
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Product Deleted',
+            'text' => 'The product has been deleted successfully.',
+        ]);
+
+        return redirect()->route('admin.products.index');
     }
 }
