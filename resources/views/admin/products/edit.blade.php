@@ -10,6 +10,17 @@ title="Productos | Codersfree"
     ['name' => 'Editar'],
     ]">
 
+     @push('css')
+     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+     @endpush
+
+     <div class ="mb-4">
+        <form action="{{route('admin.products.dropzone', $product)}}" class="dropzone" id="my-dropzone" method ="POST">
+            @csrf
+        </form>
+        </div>
+
+
     <x-wire-card>
 
          <form action="{{ route('admin.products.update',$product) }}" method="POST" class="space-y-4">
@@ -39,7 +50,14 @@ title="Productos | Codersfree"
 
     </x-wire-card>
 
-   
+   @push('js')
+       <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+       <script>
+        Dropzone.options.myDropzone = {
+    // Configuration options go here
+  }; 
+       </script>
+   @endpush
 
     
 </x-admin-layout>

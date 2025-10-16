@@ -9,3 +9,4 @@ Route::get('/', function () {
 })->name('dashboard');
 Route::resource('categories', CategoryController::class)->except(['show']); // generates all routes except 'show'
 Route::resource('products', ProductController::class)->except(['show']); // generates all routes except 'show'
+Route::post('products/{product}/dropzone', [ProductController::class, 'dropzone'])->name('products.dropzone');

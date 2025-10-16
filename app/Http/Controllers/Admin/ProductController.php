@@ -94,24 +94,15 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if($product->inventories()->exists()){
+        if ($product->inventories()->exists()) {
             session()->flash('swal', [
                 'icon' => 'error',
-                'title' => 'Cannot Delete Product',
+                'title' => 'error',
                 'text' => 'The product cannot be deleted because it has associated inventories.',
             ]);
         }
-
-        if($product->purchaseOrders()->exists()||$product->quotes()->exists()){
-            session()->flash('swal', [
-                'icon' => 'error',
-                'title' => 'Cannot Delete Product',
-                'text' => 'The product cannot be deleted because it is associated with purchase orders or quotes.',
-            ]);
-            return redirect()->route('admin.products.index');
-        }
-
-
+        
+        
         $product->delete();
 
         session()->flash('swal', [
@@ -121,5 +112,23 @@ class ProductController extends Controller
         ]);
 
         return redirect()->route('admin.products.index');
+
+     
+
+    }
+
+    public function dropzone(Request $request, Product $product)
+    {
+
+
+       $image = $product->images()->create([
+        'path' => Storage::put('/images', $request->file('file')),
+        'size' => $request->file('file')->getSize(),
+    
+    ]);
+
+        return response()->json([
+            'path' => $image->path,]);
+
     }
 }

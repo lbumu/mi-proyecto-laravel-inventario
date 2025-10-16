@@ -47,7 +47,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): voild
+    public function down(): void
     {
         Schema::dropIfExists('purchases');
     }
