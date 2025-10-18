@@ -119,16 +119,8 @@ class ProductController extends Controller
 
     public function dropzone(Request $request, Product $product)
     {
+        $path = $request->file('file')->store('images', 'public');
 
-
-       $image = $product->images()->create([
-        'path' => Storage::put('/images', $request->file('file')),
-        'size' => $request->file('file')->getSize(),
-    
-    ]);
-
-        return response()->json([
-            'path' => $image->path,]);
 
     }
 }
